@@ -1,8 +1,8 @@
 main :: IO ()
 
-saoIguais :: Integer -> Integer -> Integer -> Bool
-saoIguais a b c
+saoDiferentes :: Integer -> Integer -> Integer -> Bool
+saoDiferentes a b c
   | a /= b && a /= c && b /= c = True
   | otherwise = False
 
-main = print(saoIguais 21 1 3)
+main = print(saoDiferentes 21 1 3)
