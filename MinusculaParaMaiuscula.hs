@@ -8,4 +8,4 @@ minusculaParaMaiuscula c
   | otherwise = c
 
 
-main = print(minusculaParaMaiuscula 'z')
+main = print(minusculaParaMaiuscula 'a')
