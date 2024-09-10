@@ -35,3 +35,13 @@ somarFatoriais :: Int -> Int
 somarFatoriais x
   | x == 0 = 1
   | otherwise = (fatorial x) + (somarFatoriais (x-1))
+
+approxPi :: Integer -> Double 
+approxPi n 
+  | n == 0 = 4
+  | otherwise = 4 * (fromIntegral((-1)^n) / (fromIntegral(2*n)+1)) + (approxPi (n-1))
+
+somarComSucessor :: Int -> Int -> Int
+somarComSucessor x y 
+| y == 0 = x
+| otherwise = 
