@@ -1,3 +1,4 @@
+import Data.Char (chr, ord)
 mediaNotas :: Float -> Float -> Float -> Float
 mediaNotas n1 n2 n3 = (n1 + n2 + n3)/3
 
@@ -31,3 +32,43 @@ posicaoPlanoCartesiano x y
   | x < 0 && y > 0 = "Segundo quadrante"
   | x < 0 && y < 0 = "Terceiro quadrante"
   | x > 0 && y < 0 = "Quarto quadrante"
+
+
+mes :: Int -> String
+mes n
+  | n < 1 || n > 12 = "Nao eh mes"
+  | n == 1 = "Janeiro"
+  | n == 2 = "Fevereiro"
+  | n == 3 = "Marco"
+  | n == 4 = "Abril"
+  | n == 5 = "Maio"
+  | n == 6 = "Junho"
+  | n == 7 = "Julho"
+  | n == 8 = "Agosto"
+  | n == 9 = "Setembro"
+  | n == 10 = "Outrubro"
+  | n == 11 = "Novembro"
+  | n == 12 = "Dezembro"
+
+ehPar :: Int -> Bool
+ehPar x
+  | x `mod`2 == 0 = True
+  | otherwise = False
+
+numeroRaizesEquacao2Grau :: Float -> Float -> Float -> Int
+numeroRaizesEquacao2Grau a b c
+  | ((b * b) - (4 * a * c)) > 0 = 2
+  | ((b * b) - (4 * a * c)) == 0 = 1
+  | otherwise = 0
+
+fahrenheitParaCelsius :: Float -> Float
+fahrenheitParaCelsius f = (f - 32)/1.8
+
+imc :: Float -> Float -> Float
+imc peso altura = peso/(altura * altura)
+
+proximaLetra :: Char -> Char
+proximaLetra letra 
+  | letra == 'Z' = 'A'
+  | letra == 'z' = 'a'
+  | otherwise = chr (ord letra+1)
