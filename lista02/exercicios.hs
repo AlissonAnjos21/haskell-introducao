@@ -41,7 +41,7 @@ approxPi n
   | n == 0 = 4
   | otherwise = 4 * (fromIntegral((-1)^n) / (fromIntegral(2*n)+1)) + (approxPi (n-1))
 
-somarComSucessor :: Int -> Int -> Int
-somarComSucessor x y 
-| y == 0 = x
-| otherwise = 
+somarPorSucessor :: Int -> Int -> Int
+somarPorSucessor x y
+  | y == 0 = x
+  | otherwise = 1 + (somarPorSucessor x (y-1))
