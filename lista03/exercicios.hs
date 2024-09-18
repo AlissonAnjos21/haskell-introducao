@@ -96,3 +96,14 @@ inverterString (a:x) = (inverterString x) ++ [a]
 -- quantidadeLetrasPalavras :: String -> (Integer, Integer)
 
 -- ehPalindroma :: String -> Bool
+
+-- nomeCompletoComSubnomesAbreviados :: String -> String
+
+--ehNumeroPerfeito
+
+--intercalaListasOrdenadas :: [Integer] -> [Integer] -> [Integer]
+
+--temMaisDezElementos :: [Integer] -> Bool
+
+--somarElementosListaInteirosTailRecursion :: [Integer] -> Integer
+
