@@ -1,3 +1,5 @@
+import Data.Char (chr, ord)
+
 type Ponto = (Float, Float)
 distancia :: Ponto -> Ponto -> Float
 distancia (x1, y1) (x2, y2) = sqrt(((x1-x2)^2) + ((y1-y2)^2))
@@ -25,17 +27,72 @@ maxocorre x y z
   | (x <= z && z<= y) = if ((x == y) && (y == z)) then (y, 3) else if ((x == y) || (z == y)) then (y, 2) else (y, 1)
 
 tamanhoListaInteiros :: [Integer] -> Integer
+tamanhoListaInteiros [] = 0
+tamanhoListaInteiros (a:x) = 1 + (tamanhoListaInteiros x)
 
 somarListaInteiros :: [Integer] -> Integer
+somarListaInteiros [] = 0
+somarListaInteiros (a:x) = a + (somarListaInteiros x)
 
-dobrarListaInteiros :: [Integer] -> Integer
+dobrarListaInteiros :: [Integer] -> [Integer]
+dobrarListaInteiros [] = []
+dobrarListaInteiros (a:x) = (2*a):(dobrarListaInteiros x) 
 
-ehElementoListaInteiros :: [Integer] -> Bool
+ehElementoListaInteiros :: Integer -> [Integer] -> Bool
+ehElementoListaInteiros n [] = False
+ehElementoListaInteiros n (a:x) = if (a == n) then True else (ehElementoListaInteiros n x)
 
-insertSort :: [Integer] -> Integer
+-- insertSort :: [Integer] -> [Integer]
 
-selectionSort :: [Integer] -> Integer
+-- selectionSort :: [Integer] -> [Integer]
 
-mergeSort :: [Integer] -> Integer
+-- mergeSort :: [Integer] -> [Integer]
 
-quickSort :: [Integer] -> Integer
+-- quickSort :: [Integer] -> [Integer]
+
+transformaEmLista ::  String -> [String]
+transformaEmLista "" = []
+transformaEmLista (a:x) = (show a):(transformaEmLista x)
+
+contarVogaisString :: String -> Integer
+contarVogaisString [] = 0
+contarVogaisString (a:x) = if (a == 'a') || (a == 'e') || (a == 'i') || (a == 'o') || (a == 'u') || (a == 'A') || (a == 'E') || (a == 'I') || (a == 'O') || (a == 'U') then 1 + (contarVogaisString x) else 0 + (contarVogaisString x)
+
+-- quantidadePalavras :: String -> Int
+
+cifraDeCesar :: Char -> Char
+cifraDeCesar p
+  | p == 'x' = 'a'
+  | p == 'y' = 'b'
+  | p == 'z' = 'c'
+  | p == 'X' = 'A'
+  | p == 'Y' = 'B'
+  | p == 'Z' = 'C'
+  | otherwise = chr((ord p) + 3)
+
+palavraParaCifraDeCesar :: String -> String
+palavraParaCifraDeCesar [] = []
+palavraParaCifraDeCesar (a:x) = (cifraDeCesar a):(palavraParaCifraDeCesar x)
+
+inverterString :: String -> String
+inverterString [] = []
+inverterString (a:x) = (inverterString x) ++ [a]
+
+-- minusculoParaMaiusculo :: Char -> Char
+-- minusculoParaMaiusculo p = chr((ord p) - 32)
+
+-- minusculasParaPrimeiraPalavraMaiuscula :: String -> String
+
+-- buscaBinaria ::
+
+-- maiorElementoListaInteiros :: [Integer] -> Integer
+
+-- menorElementoListaInteiros :: [Integer] -> Integer
+
+-- maiorMenorElementoListaInteiros :: [Integer] -> (Integer, Integer)
+
+-- quantidadeLetras
+
+-- quantidadeLetrasPalavras :: String -> (Integer, Integer)
+
+-- ehPalindroma :: String -> Bool
