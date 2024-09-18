@@ -85,17 +85,28 @@ inverterString (a:x) = (inverterString x) ++ [a]
 
 -- buscaBinaria ::
 
--- maiorElementoListaInteiros :: [Integer] -> Integer
+maiorElementoListaInteiros :: [Integer] -> Integer
+maiorElementoListaInteiros (a:[]) = a 
+maiorElementoListaInteiros (a:b:x) = if (a > b) then (maiorElementoListaInteiros (a:x)) else (maiorElementoListaInteiros (b:x))  
 
--- menorElementoListaInteiros :: [Integer] -> Integer
+menorElementoListaInteiros :: [Integer] -> Integer
+menorElementoListaInteiros (a:[]) = a 
+menorElementoListaInteiros (a:b:x) = if (a < b) then (menorElementoListaInteiros (a:x)) else (menorElementoListaInteiros (b:x))
 
--- maiorMenorElementoListaInteiros :: [Integer] -> (Integer, Integer)
+maiorMenorElementoListaInteiros :: [Integer] -> (Integer, Integer)
+maiorMenorElementoListaInteiros lista = (maior, menor)
+  where
+    maior = (maiorElementoListaInteiros lista)
+    menor = (menorElementoListaInteiros lista)
 
--- quantidadeLetras
+quantidadeLetras :: String -> Integer
+quantidadeLetras [] = 0
+quantidadeLetras (a:x) = if (a == ' ') then 0 + (quantidadeLetras x) else 1 + (quantidadeLetras x)
 
 -- quantidadeLetrasPalavras :: String -> (Integer, Integer)
 
--- ehPalindroma :: String -> Bool
+ehPalindroma :: String -> Bool
+ehPalindroma str = if (str == (inverterString str)) then True else False
 
 -- nomeCompletoComSubnomesAbreviados :: String -> String
 
@@ -105,5 +116,6 @@ inverterString (a:x) = (inverterString x) ++ [a]
 
 --temMaisDezElementos :: [Integer] -> Bool
 
---somarElementosListaInteirosTailRecursion :: [Integer] -> Integer
-
+somarElementosListaInteirosTailRecursion :: [Integer] -> Integer
+somarElementosListaInteirosTailRecursion [] = 0
+somarElementosListaInteirosTailRecursion (a:x) = a + (somarElementosListaInteirosTailRecursion (x))
