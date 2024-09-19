@@ -42,13 +42,49 @@ ehElementoListaInteiros :: Integer -> [Integer] -> Bool
 ehElementoListaInteiros n [] = False
 ehElementoListaInteiros n (a:x) = if (a == n) then True else (ehElementoListaInteiros n x)
 
--- insertSort :: [Integer] -> [Integer]
+inserir :: Integer -> [Integer] -> [Integer]
+inserir a [] = [a]
+inserir a (b:x)
+  | a < b = (a:b:x)
+  | otherwise = b:(inserir a x)
 
--- selectionSort :: [Integer] -> [Integer]
+insertSort :: [Integer] -> [Integer]
+insertSort [] = []
+insertSort (a:x) = (inserir a (insertSort x))
+
+minimoLocal :: Integer -> Integer -> Integer
+minimoLocal x y = if (x < y) then x else y 
+
+encontrarMinimo :: [Integer] -> Integer
+encontrarMinimo (a:[]) = a
+encontrarMinimo (a:x) = (minimoLocal a (encontrarMinimo x))
+
+listaSemElementoMinimo :: [Integer] -> [Integer]
+listaSemElementoMinimo [] = []
+listaSemElementoMinimo (a:x) = if (a == (encontrarMinimo (a:x))) then x else (a:(listaSemElementoMinimo x))
+
+selectionSort :: [Integer] -> [Integer]
+selectionSort [] = []
+selectionSort (a:x) = ((encontrarMinimo (a:x)):(selectionSort (listaSemElementoMinimo (a:x))))
 
 -- mergeSort :: [Integer] -> [Integer]
 
--- quickSort :: [Integer] -> [Integer]
+maximoLocal :: Integer -> Integer -> Integer
+maximoLocal x y = if (x > y) then x else y 
+
+particiona :: Integer -> [Integer] -> ([Integer], [Integer])
+particiona pivo [] = ([], [])
+particiona pivo (a:x)
+  |  pivo < a = (menores, a:maiores)
+  | otherwise = (a:menores, maiores)
+  where
+    (menores, maiores) = (particiona pivo x) 
+
+quickSort :: [Integer] -> [Integer]
+quickSort [] = []
+quickSort (pivo:x) = (quickSort(menores)) ++ [pivo] ++ (quickSort(maiores))
+  where
+    (menores, maiores) = (particiona pivo x)
 
 transformaEmLista ::  String -> [String]
 transformaEmLista "" = []
