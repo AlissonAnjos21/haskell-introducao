@@ -58,7 +58,9 @@ contarVogaisString :: String -> Integer
 contarVogaisString [] = 0
 contarVogaisString (a:x) = if (a == 'a') || (a == 'e') || (a == 'i') || (a == 'o') || (a == 'u') || (a == 'A') || (a == 'E') || (a == 'I') || (a == 'O') || (a == 'U') then 1 + (contarVogaisString x) else 0 + (contarVogaisString x)
 
--- quantidadePalavras :: String -> Int
+quantidadePalavras :: String -> Integer
+quantidadePalavras [] = 1
+quantidadePalavras (a:x) = if (a == ' ') then 1 + (quantidadePalavras x) else 0 + (quantidadePalavras x)
 
 cifraDeCesar :: Char -> Char
 cifraDeCesar p
@@ -103,18 +105,37 @@ quantidadeLetras :: String -> Integer
 quantidadeLetras [] = 0
 quantidadeLetras (a:x) = if (a == ' ') then 0 + (quantidadeLetras x) else 1 + (quantidadeLetras x)
 
--- quantidadeLetrasPalavras :: String -> (Integer, Integer)
+quantidadeLetrasPalavras :: String -> (Integer, Integer)
+quantidadeLetrasPalavras str = (letras, palavras)
+  where
+    letras = (quantidadeLetras str)
+    palavras = (quantidadePalavras str)
 
 ehPalindroma :: String -> Bool
 ehPalindroma str = if (str == (inverterString str)) then True else False
 
 -- nomeCompletoComSubnomesAbreviados :: String -> String
 
---ehNumeroPerfeito
+-- divisoresDeN :: Integer -> [Integer]
+-- a opcao abaixo funciona porem usa de ferramentas ja presentes na linguagem
+-- divisoresDeN n = [x | x <- [1..(n-1)], ((n `mod` x) == 0)]
+-- faremos o mesmo so que de maneira direta
+funcaoAuxiliarDivisoresDeN :: Integer -> Integer -> [Integer]
+funcaoAuxiliarDivisoresDeN n 1 = [1]
+funcaoAuxiliarDivisoresDeN n m = if ((n `mod`m) == 0) then m:(funcaoAuxiliarDivisoresDeN n (m-1)) else (funcaoAuxiliarDivisoresDeN n (m-1))
+
+divisoresDeN :: Integer -> [Integer]
+divisoresDeN n = (funcaoAuxiliarDivisoresDeN n (n-1))
+
+ehNumeroPerfeito :: Integer -> Bool
+ehNumeroPerfeito n = if((sum (divisoresDeN n)) == n) then True else False
 
 --intercalaListasOrdenadas :: [Integer] -> [Integer] -> [Integer]
 
---temMaisDezElementos :: [Integer] -> Bool
+temMaisDezElementos :: [Integer] -> Bool
+temMaisDezElementos [] = False
+temMaisDezElementos (_:_:_:_:_:_:_:_:_:_:_:x) = True
+temMaisDezElementos _ = False
 
 somarElementosListaInteirosTailRecursion :: [Integer] -> Integer
 somarElementosListaInteirosTailRecursion [] = 0
