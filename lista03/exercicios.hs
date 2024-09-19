@@ -114,6 +114,10 @@ quantidadeLetrasPalavras str = (letras, palavras)
 ehPalindroma :: String -> Bool
 ehPalindroma str = if (str == (inverterString str)) then True else False
 
+-- nomes :: String -> [String]
+-- nomes [] = []
+-- nomes (a:x) = 
+
 -- nomeCompletoComSubnomesAbreviados :: String -> String
 
 -- divisoresDeN :: Integer -> [Integer]
@@ -130,7 +134,9 @@ divisoresDeN n = (funcaoAuxiliarDivisoresDeN n (n-1))
 ehNumeroPerfeito :: Integer -> Bool
 ehNumeroPerfeito n = if((sum (divisoresDeN n)) == n) then True else False
 
---intercalaListasOrdenadas :: [Integer] -> [Integer] -> [Integer]
+-- intercalaListasOrdenadas :: [Integer] -> [Integer] -> [Integer]
+-- intercalaListasOrdenadas (a:x) (b:y)
+  -- | ((a:x) == (a:[])) || ((b:y) == (b:[])) = if (a > b)
 
 temMaisDezElementos :: [Integer] -> Bool
 temMaisDezElementos [] = False
