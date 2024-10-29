@@ -28,9 +28,9 @@ numerosPalindromos = [x | x <- [1..1000], (x < 10) || ((x < 100) && (x `mod` 11 
 
 -- 2. Utilizando funções de alta ordem map, foldl, foldr e filter
 -- (a) Crie uma função que dobra cada elemento de uma lista
--- (b) Escreva uma função que ltra apenas os números pares de uma lista de 1 a 20.
+-- (b) Escreva uma função que filtra apenas os números pares de uma lista de 1 a 20.
 -- (c) Use foldl para somar todos os elementos de uma lista
--- (d) Combine map e lter para criar uma função que primeiro ltra os números pares e depois os dobra.
+-- (d) Combine map e filter para criar uma função que primeiro ltra os números pares e depois os dobra.
 -- (e) Use foldl para calcular o produto de todos os elementos de uma lista.
--- (f) Escreva uma função que primeiro ltra os números maiores que 5 e depois adiciona 1 a cada um deles.
+-- (f) Escreva uma função que primeiro filtra os números maiores que 5 e depois adiciona 1 a cada um deles.
 
