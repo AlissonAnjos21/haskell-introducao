@@ -53,3 +53,45 @@ topicos para aprofundamento:
   *funcoes polimorficas
   *map, foldl, foldr e filter
 -}
+
+{-
+  foldl: funciona da esquerda pra direita (por isso, pode ser lido como foldLEFT)
+  (b -> a -> b) -> b -> [a] -> b
+
+  (b -> a -> b): funcao acumuladora - eh uma funcao que recebe um acumulador inicial b, um valor a e retorna um novo acumulador b
+  
+  b: acumulador inicial
+
+  [a]: lista de valores que serao passados para a funcao acumuladora
+  
+  b: resultado final - resultado apos todas as acumulacoes
+-}
+
+foldEsquerda :: (b -> a -> b) -> b -> [a] -> b
+foldEsquerda f v [] = v
+foldEsquerda f v (x:xs) = foldEsquerda f (f v x) xs
+
+{-
+exemplo:
+foldEsquerda (+) 0 [1, 2, 3, 4]
+foldEsquerda (+) ((+) 0 1) [2, 3, 4]
+foldEsquerda (+) ((+) ((+) 0 1) 2) [3, 4]
+foldEsquerda (+) ((+) ((+) ((+) 0 1) 2) 3) [4]
+foldEsquerda (+) ((+) ((+) ((+) ((+) 0 1) 2) 3) 4) []
+((+) ((+) ((+) ((+) 0 1) 2) 3) 4)
+((+) ((+) ((+) 1 2) 3) 4)
+((+) ((+) 3 3) 4)
+((+) 6 4)
+10
+-}
+
+{-
+a funcao foldr eh semelhante, porem o processamento ocorre da direita para a esquerda
+(a -> b ->  b) -> b -> [a] -> b
+-}
+
+foldDireita :: (a -> b -> b) -> b -> [a] -> b
+foldDireita f v [] = v
+foldDireita f v (x:xs) =  f x (foldDireita f v xs)
+
+-- o foldr eh melhor para quando trabalhamos com listas infinitas pois, ele fornece resultado antes mesmo de terminar de percorrer a lista. Lembre-se que o Haskell trabalha com lazy evaluation.
