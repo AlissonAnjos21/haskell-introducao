@@ -28,9 +28,40 @@ numerosPalindromos = [x | x <- [1..1000], (x < 10) || ((x < 100) && (x `mod` 11 
 
 -- 2. Utilizando funções de alta ordem map, foldl, foldr e filter
 -- (a) Crie uma função que dobra cada elemento de uma lista
+map' :: (a -> b) -> [a] -> [b]
+map' f lista = [f x | x <- lista]
+
+dobrar :: [Int] -> [Int]
+dobrar lista = (map' (*2) lista)
+
 -- (b) Escreva uma função que filtra apenas os números pares de uma lista de 1 a 20.
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' f lista = [x | x <- lista, (f x) == True]
+
+pares :: [Int] -> [Int]
+pares lista = filter' even lista
+
 -- (c) Use foldl para somar todos os elementos de uma lista
--- (d) Combine map e filter para criar uma função que primeiro ltra os números pares e depois os dobra.
+foldl' :: (Int -> Int -> Int) -> Int -> [Int] -> Int
+foldl' f v [] = v
+foldl' f v (x:lista) = foldl' f (f v x) lista 
+
+somar :: [Int] -> Int
+somar lista = foldl' (+) 0 lista
+
+
+-- (d) Combine map e filter para criar uma função que primeiro filtra os números pares e depois os dobra.
+
+dobraPar :: [Int] -> [Int]
+dobraPar lista = map (*2) (filter even lista)
+
+
 -- (e) Use foldl para calcular o produto de todos os elementos de uma lista.
+
+produto :: [Int] -> Int
+produto lista = foldl (*) 1 lista
+
 -- (f) Escreva uma função que primeiro filtra os números maiores que 5 e depois adiciona 1 a cada um deles.
 
+sucessorMaiores5 :: [Int] -> [Int]
+sucessorMaiores5 lista = map succ (filter (>5) lista)
