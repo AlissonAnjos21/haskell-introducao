@@ -34,28 +34,58 @@ time4 :: TIME
 time4 = Total 9 5 -- 09:05 AM
 
 --a. Defina a funcao totalMinutos :: TIME -> Int que conta o total de minutos de uma dada hora.
-
+totalMinutos :: TIME -> Int
+totalMinutos (Total h m) = (h * 60) + m 
+totalMinutos (Local h m AM) = (h * 60) + m
+totalMinutos (Local h m PM) = (12 * 60) + (h * 60) + m
 
 --b. Defina TIME como instancia da classe Eq de forma a que a igualdade entre horas seja independente do formato em que hora esta guardada.
 
+instance Eq TIME where
+  (Local h1 m1 AM) == (Local h2 m2 AM) = (h1 == h2) && (m1 == m2) && (AM == AM)
+  (Local h1 m1 AM) == (Total h2 m2) = (h2 < 12) && (h1 == h2) && (m1 == m2)
+  (Local h1 m1 PM) == (Local h2 m2 PM) = (h1 == h2) && (m1 == m2) && (PM == PM)
+  (Local h1 m1 PM) == (Total h2 m2) = (h2 > 12) && ((h1+12) == h2) && (m1 == m2)
+  (Total h1 m1) == (Total h2 m2) = (h1 == h2) && (m1 == m2)
 
 --c. Defina TIME como instancia da classe Ord.
 
+{-
+instance Ord TIME where
+  (Local h1 m1 AM) < (Local h2 m2 AM) =
+  (Local h1 m1 AM) <= (Local h2 m2 AM) =   
+  (Local h1 m1 AM) > (Local h2 m2 AM) =
+  (Local h1 m1 AM) >= (Local h2 m2 AM) =
+  
+  (Local h1 m1 PM) < (Local h2 m2 PM) =
+  (Local h1 m1 PM) <= (Local h2 m2 PM) =   
+  (Local h1 m1 PM) > (Local h2 m2 PM) =
+  (Local h1 m1 PM) >= (Local h2 m2 PM) =
 
+  (Total h1 m1) < (Total h2 m2) =
+  (Total h1 m1) <= (Total h2 m2) =   
+  (Total h1 m1) > (Total h2 m2) =
+  (Total h1 m1) >= (Total h2 m2) = 
 
+  (Local h1 m1 AM) < (Total h2 m2) =
+  (Local h1 m1 AM) <= (Total h2 m2) =
+  (Local h1 m1 AM) > (Total h2 m2) =
+  (Local h1 m1 AM) >= (Total h2 m2) =
 
+  (Local h1 m1 PM) < (Total h2 m2) =
+  (Local h1 m1 PM) <= (Total h2 m2) =
+  (Local h1 m1 PM) > (Total h2 m2) =
+  (Local h1 m1 PM) >= (Total h2 m2) =
 
-
-
-
-
+--nao vou fazer pela falta de tempo, mas nao eh algo complicado
+-}
 
 
 
 
 --3) Dado o tipo algebrico:
 
-data Nat = Zero | Succ Nat deriving (Show)
+data Nat = Zero | Succ Nat --deriving (Show)
 
 {-
 Esse tipo representa numeros naturais, onde:
@@ -67,26 +97,22 @@ Implemente as seguintes funcoes para operar com valores do tipo Nat:
 -}
 
 --a. Funcao para converter Nat para Int:
-natToInt :: Nat -> Int
-natToInt x = 1
 --A funcao deve converter um numero natural no tipo Nat para um valor do tipo Int.
-
-
-
-
-
-
+natToInt :: Nat -> Int
+natToInt Zero = 0
+natToInt (Succ x) = 1 + (natToInt x)
 
 --b. Funcao para somar dois numeros naturais:
-soma :: Nat -> Nat -> Nat
-soma x y = x
 --A funcao deve receber dois numeros naturais e retornar a sua soma, tambem no tipo Nat.
-
-
-
-
-
+soma :: Nat -> Nat -> Nat
+soma Zero y = y
+soma (Succ x) y = soma x (Succ y)
 
 --c. Incluir o tipo Nat na classe Eq e na classe Show
 
+instance Eq Nat where
+  (Zero) == (Zero) = True
+  (Succ n1) == (Succ n2) = (natToInt n1) == (natToInt n2) 
 
+instance Show Nat where
+  show n = show (natToInt n)
